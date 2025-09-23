@@ -5,10 +5,10 @@ Written in C++
 
 
 # Build Instructions:
-1. Install Raylib using vcpkg
-2. Clone the repo: <br>
+1. Clone the repo: <br>
 `https://github.com/ThePlayerRolo/PongRayLib.git` 
-3. Open Visual Studio 2022
+2. Open Visual Studio 2022
+3. Install Raylib Nuget Plugin
 4. Build Solution
 
 # TODO:
