@@ -15,3 +15,4 @@ Written in C++
 * Change to CMake Build System
 * Add Audio
 * Allow resizeable windows
+* Remove Terminal
