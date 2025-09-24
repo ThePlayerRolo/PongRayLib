@@ -4,6 +4,7 @@
 #include "EndScreen.h"
 #include "ScoreManager.h"
 #include "GameManager.h"
+#include "Audio.h"
 
 EndScreen::EndScreen() : GameObject({0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}, "EndScreen") {
 	mFinalScoreData.mCPUPoints = -1;
@@ -34,10 +35,14 @@ void EndScreen::Draw() {
 }
 
 void EndScreen::Update() {
+	printf("gameManager->CurrentState: %d", currentState);
+
 	if (IsKeyPressed(KEY_ESCAPE)) {
 		CloseWindow();
 	}
 	if (IsKeyPressed(KEY_ENTER)) {
-		gameManager->GameStateTitleInit();
+		PlaySound(SOUND_ENTER);
+		gameManager->mIsNotTransitioned = true;
+		currentState = GAME_TITLE;
 	}
 }

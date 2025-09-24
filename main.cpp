@@ -8,11 +8,13 @@ const s32 ScreenHeight = 600;
 int main()
 {
 	InitWindow(ScreenWidth, ScreenHeight, "PONG");
+	InitAudioDevice();
 	SetTargetFPS(60);
 	gameManager = new GameManager();
 	gameManager->GameStateTitleInit();
+	InitSounds();
 	while (!WindowShouldClose()) {
-		
+		gameManager->Update();
 		//Run all existing Object's Update functions
 		for (u8 i = 0; i < 255; i++) {
 			if (objPool[i] != nullptr) {
@@ -37,7 +39,7 @@ int main()
 		EndDrawing();
 	}
 	delete gameManager;
-
+	UnloadSounds();
 	CloseWindow();
 	return 0;
 }

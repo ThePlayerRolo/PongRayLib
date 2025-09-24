@@ -10,10 +10,11 @@
 #include "TitleScreen.h"
 
 GameManager* gameManager;
+GameStates currentState;
 
 GameManager::GameManager() {
 	scoreManager = nullptr;
-	currentState = GAME_MAIN;
+	mIsNotTransitioned = false;
 }
 
 GameManager::~GameManager() {
@@ -21,6 +22,7 @@ GameManager::~GameManager() {
 }
 
 void GameManager::ClearGameObj() {
+	printf("Hi\n");
 	for (u8 i = 0; i < 255; i++) {
 		if (objPool[i] != nullptr) {
 			delete objPool[i];
@@ -46,6 +48,7 @@ void GameManager::GameStateMainInit() {
 	Paddle* PlayerPaddle = new Paddle({ 50.0f, 250.0f }, true, "PlayerPaddle");
 	Paddle* CPUPaddle = new Paddle({ 750.0f, 250.0f }, false, "CPUPaddle");
 	scoreManager->Init();
+
 	InitGameObj();
 }
 
@@ -61,4 +64,11 @@ void GameManager::GameStateTitleInit() {
 	currentState = GAME_TITLE;
 	TitleScreen* titleScreen = new TitleScreen();
 	InitGameObj();
+}
+
+void GameManager::Update() {
+	if (currentState == GAME_TITLE && mIsNotTransitioned) {
+		GameStateTitleInit();
+		mIsNotTransitioned = false;
+	}
 }

@@ -5,10 +5,12 @@
 #include "ScoreManager.h"
 #include "GameObject.h"
 #include "GameManager.h"
+#include "Audio.h"
 
 ScoreManager::ScoreManager() {
 	mScoreData.mPlayerPoints = mScoreData.mCPUPoints = -1;
 	mScoreData.mDidPlayerWin = false;
+	IsGameDone = false;
 }
 
 ScoreManager::~ScoreManager() {
@@ -19,28 +21,35 @@ void ScoreManager::Init() {
 	mScoreData.mPlayerPoints = 0;
 	mScoreData.mCPUPoints = 0;
 	mScoreData.mDidPlayerWin = false;
+	IsGameDone = false;
 }
 
 void ScoreManager::Draw() {
-	if (gameManager->currentState == GAME_MAIN) {
+	if (currentState == GAME_MAIN) {
 		DrawText(TextFormat("%d", mScoreData.mPlayerPoints), 200, 50, 60, DARKBLUE);
 		DrawText(TextFormat("%d", mScoreData.mCPUPoints), 600, 50, 60, DARKBLUE);
 	}
 }
 
 void ScoreManager::Update() {
-	if (mScoreData.mPlayerPoints >= 10) {
-		mScoreData.mDidPlayerWin = true;
-		gameManager->GameStateEndInit();
+	if (!IsGameDone) {
+		if (mScoreData.mPlayerPoints >= 10) {
+			mScoreData.mDidPlayerWin = true;
+			gameManager->GameStateEndInit();
+			IsGameDone = true;
 
-	}
-	else if (mScoreData.mCPUPoints >= 10) {
-		mScoreData.mDidPlayerWin = false;
-		gameManager->GameStateEndInit();
+		}
+		else if (mScoreData.mCPUPoints >= 10) {
+			mScoreData.mDidPlayerWin = false;
+			gameManager->GameStateEndInit();
+			IsGameDone = true;
+		}
 	}
 }
 
 void ScoreManager::Score(bool isPlayer) {
+	PlaySound(SOUND_TADA);
+
 	if (isPlayer) {
 		mScoreData.mPlayerPoints++;
 	}

@@ -21,8 +21,10 @@ public:
 	void GameStateTitleInit();
 	void GameStateMainInit();
 	void GameStateEndInit();
-
+	void Update();
 	ScoreManager* scoreManager;
-	GameStates currentState;
+	bool mIsNotTransitioned;
 };
 extern GameManager* gameManager;
+
+extern GameStates currentState;

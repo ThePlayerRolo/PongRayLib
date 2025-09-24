@@ -5,6 +5,7 @@
 #include "../types.h"
 #include "ScoreManager.h"
 #include "GameManager.h"
+#include "Audio.h"
 
 Ball::Ball(Vector2 startPos) : GameObject(startPos, { startPos.x - 10, startPos.y - 10, 20.0f, 20.0f }, "Ball") {
 	mRadius = 0.0f;
@@ -41,6 +42,7 @@ void Ball::Update() {
 	}
 
 	if (isCollidedWithObject()) {
+		PlaySound(SOUND_HIT);
 		mVelocity.x *= -1.0f;
 		f32 paddleY = objPool[mCollision]->mPos.y + 45.0f;
 		f32 ballY = mPos.y;
@@ -57,6 +59,7 @@ void Ball::Update() {
 		mCollision = -1;
 	}
 	if ((mCollisionBox.y + mCollisionBox.height) >= (GetScreenHeight()) || mCollisionBox.y <= 0.0f) {
+		PlaySound(SOUND_HIT);
 		mVelocity.y *= -1.0f;
 	}
 	mRadius *= mScale.x;

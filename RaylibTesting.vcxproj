@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Audio.cpp" />
     <ClCompile Include="Game\Ball.cpp" />
     <ClCompile Include="Game\EndScreen.cpp" />
     <ClCompile Include="Game\GameManager.cpp" />

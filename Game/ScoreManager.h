@@ -19,4 +19,5 @@ public:
 	void Draw();
 	void Score(bool);
 	ScoreData mScoreData;
+	bool IsGameDone;
 };
