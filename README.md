@@ -11,6 +11,6 @@ Written in C++
 3. Install Raylib Nuget Plugin
 4. Build Solution
 
-# TODO:
+# TODO (In probably the not so near future):
 * Change to CMake Build System
 * Allow resizeable windows
